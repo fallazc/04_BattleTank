@@ -16,6 +16,8 @@ void ATankAIController::BeginPlay()
 	}
 }
 
+
+
 ATank* ATankAIController::GetControlledTank() const
 {
 	return Cast<ATank>(GetPawn());
