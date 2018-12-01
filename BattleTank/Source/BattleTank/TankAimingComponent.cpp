@@ -29,12 +29,9 @@ void UTankAimingComponent::BeginPlay()
 }
 
 
-void UTankAimingComponent::AimAt(FVector HitLocation)
+void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 {
-	FString OwnerName = GetOwner()->GetName();
-	FString TargetLocation = HitLocation.ToString();
-	FString BarrelLocation = Barrel->GetComponentLocation().ToString();
-	UE_LOG(LogTemp, Warning, TEXT("%s aiming at %s from %s"), *OwnerName, *TargetLocation, *BarrelLocation);
+	UE_LOG(LogTemp, Warning, TEXT("Firing at %f"), LaunchSpeed);
 }
 
 // Called every frame
