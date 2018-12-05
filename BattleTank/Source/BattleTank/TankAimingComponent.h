@@ -22,7 +22,7 @@ public:
 
 	void setBarrelReference(UTankBarrel* BarrelToSet);
 
-	void setTurretReference(UTankTurret* BarrelToSet);
+	void setTurretReference(UTankTurret* TurretToSet);
 
 	void AimAt(FVector HitLocation, float LauncSpeed);
 
