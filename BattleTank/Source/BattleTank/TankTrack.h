@@ -21,5 +21,5 @@ public:
 	
 		//Max force per track in Newton
 		UPROPERTY(EditDefaultsOnly, Category = Setup)
-		float TrackMaxDrivingForce = 40000; // Assume 40 tone, and 1g acceleration
+		float TrackMaxDrivingForce = 40000000; // Assume 40 tone, and 1g acceleration
 };

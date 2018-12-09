@@ -37,9 +37,6 @@ public:
 protected:
 	UTankAimingComponent* TankAimingComponent = nullptr;
 
-	UPROPERTY(BlueprintReadOnly)
-	UTankMovementComponent* TankMovementComponent = nullptr;
-
 	// Called to bind functionality to input
 	virtual void BeginPlay() override;
 
