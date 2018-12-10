@@ -9,6 +9,15 @@ void UTankMovementComponent::Initialize(UTankTrack* LeftTrackToSet, UTankTrack* 
 	RightTrack = RightTrackToSet;
 }
 
+void UTankMovementComponent::RequestDirectMove(const FVector& MoveVelocity, bool bForceMaxSpeed)
+{
+	FString TankName = GetOwner()->GetName();
+	FString MoveVelocityString = MoveVelocity.ToCompactString();
+
+	//No need to call super as we are replacing the functionality
+	UE_LOG(LogTemp, Warning, TEXT("%s vectoring to %s"), *TankName, *MoveVelocityString);
+}
+
 void UTankMovementComponent::IntendMove(float Throw)
 {
 	if (LeftTrack && RightTrack)
@@ -23,6 +32,7 @@ void UTankMovementComponent::IntendTurn(float Throw)
 {
 	if (LeftTrack && RightTrack)
 	{
+		
 		LeftTrack->SetThrottle(Throw);
 		RightTrack->SetThrottle(-Throw);
 	}
