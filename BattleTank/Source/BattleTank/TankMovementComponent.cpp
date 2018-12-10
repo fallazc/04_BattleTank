@@ -11,11 +11,16 @@ void UTankMovementComponent::Initialize(UTankTrack* LeftTrackToSet, UTankTrack* 
 
 void UTankMovementComponent::RequestDirectMove(const FVector& MoveVelocity, bool bForceMaxSpeed)
 {
-	FString TankName = GetOwner()->GetName();
-	FString MoveVelocityString = MoveVelocity.ToCompactString();
+	/*FString TankName = GetOwner()->GetName();
+	FString AIForwardIntentionString = MoveVelocity.ToCompactString();
 
 	//No need to call super as we are replacing the functionality
-	UE_LOG(LogTemp, Warning, TEXT("%s vectoring to %s"), *TankName, *MoveVelocityString);
+	UE_LOG(LogTemp, Warning, TEXT("%s vectoring to %s"), *TankName, *AIForwardIntentionString);*/
+	FVector AIForwardIntention = MoveVelocity.GetSafeNormal();
+	FVector TankForward = GetOwner()->GetActorForwardVector().GetSafeNormal();
+
+	float ForwardThrow = FVector::DotProduct(AIForwardIntention, TankForward);
+	IntendMove(ForwardThrow);
 }
 
 void UTankMovementComponent::IntendMove(float Throw)
