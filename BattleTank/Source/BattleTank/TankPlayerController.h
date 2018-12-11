@@ -40,7 +40,7 @@ protected:
 	float CrosshairYLocation = 0.33333f;
 	
 	UPROPERTY(EditDefaultsOnly)
-	float LineTraceRange = 1000000.0f;
+	float LineTraceRange = 10000000.0f;
 
 protected:
 	UFUNCTION(BlueprintCallable, Category = Setup)
