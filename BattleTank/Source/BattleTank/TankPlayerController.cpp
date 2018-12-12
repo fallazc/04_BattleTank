@@ -81,7 +81,8 @@ bool ATankPlayerController::GetLookVectorHitLocation(FVector LookDirection, FVec
 void ATankPlayerController::AimTowardsCrosshair()
 {
 	FVector HitLocation;
-	if (GetSightRayHitLocation(HitLocation))
+	ATank*ControlledTank = GetControlledTank();
+	if (ensure(ControlledTank) && GetSightRayHitLocation(HitLocation))
 	{
 		GetControlledTank()->AimAt(HitLocation);
 	}
