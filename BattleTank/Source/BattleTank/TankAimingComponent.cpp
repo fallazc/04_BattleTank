@@ -16,15 +16,9 @@ UTankAimingComponent::UTankAimingComponent()
 	// ...
 }
 
-
-void UTankAimingComponent::setBarrelReference(UTankBarrel* BarrelToSet)
+UTankBarrel* UTankAimingComponent::GetBarrelReference() const
 {
-	Barrel = BarrelToSet;
-}
-
-void UTankAimingComponent::setTurretReference(UTankTurret* TurretToSet)
-{
-	Turret = TurretToSet;
+	return Barrel;
 }
 
 void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
@@ -56,6 +50,15 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 		{
 			//No aim solution found		
 		}
+	}
+}
+
+void UTankAimingComponent::Initialize(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet)
+{
+	if (BarrelToSet && TurretToSet)
+	{
+		Barrel = BarrelToSet;
+		Turret = TurretToSet;
 	}
 }
 
