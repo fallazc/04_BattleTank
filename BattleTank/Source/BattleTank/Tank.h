@@ -8,11 +8,8 @@
 
 // Forward declarations
 class UTankBarrel;
-class UTankTurret;
-class UTankTrack;
 class AProjectile;
 class UTankAimingComponent;
-class UTankMovementComponent;
 
 UCLASS()
 class BATTLETANK_API ATank : public APawn
@@ -40,6 +37,7 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 private:
+	//TODO remove once firing is moved to aiming component
 	UPROPERTY(EditDefaultsOnly, Category = Firing)
 	float LaunchSpeed = 100000.f; // TODO find sensible default
 	
