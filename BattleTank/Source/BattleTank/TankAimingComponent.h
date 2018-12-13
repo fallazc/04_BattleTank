@@ -32,7 +32,7 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Setup)
 	UTankBarrel* GetBarrelReference() const;
 
-	void AimAt(FVector HitLocation, float LauncSpeed);
+	void AimAt(FVector HitLocation);
 
 	UFUNCTION(BlueprintCallable, Category = Setup)
 	void Initialize(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet);
@@ -40,6 +40,9 @@ public:
 protected:
 	UPROPERTY(BlueprintReadOnly, Category = State)
 	EFiringState FiringState = EFiringState::Locked;
+
+	UPROPERTY(EditDefaultsOnly, Category = Firing)
+	float LaunchSpeed = 4000.f;
 
 private:
 	UTankBarrel* Barrel = nullptr;

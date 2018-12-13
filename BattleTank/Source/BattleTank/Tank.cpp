@@ -1,9 +1,10 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "Tank.h"
-#include "TankAimingComponent.h"
 #include "Projectile.h"
 #include "TankBarrel.h"
+#include "Engine/World.h"
+#include "Components/InputComponent.h"
 
 // Sets default values
 ATank::ATank()
@@ -14,7 +15,6 @@ ATank::ATank()
 
 void ATank::Fire()
 {
-	
 	if (ensure(Barrel))
 	{
 		bool IsReloaded = (FPlatformTime::Seconds() - LastFireTime) > ReloadTimeInSeconds;
@@ -32,25 +32,10 @@ void ATank::Fire()
 	}
 }
 
-void ATank::AimAt(FVector HitLocation)
-{
-	if (ensure(TankAimingComponent))
-	{
-		TankAimingComponent->AimAt(HitLocation, LaunchSpeed);
-	}
-}
-
 // Called when the game starts or when spawned
 void ATank::BeginPlay()
 {
 	Super::BeginPlay();
-
-	TankAimingComponent = FindComponentByClass<UTankAimingComponent>();
-	
-	if (ensure(TankAimingComponent))
-	{
-		Barrel = TankAimingComponent->GetBarrelReference();
-	}
 }
 
 // Called to bind functionality to input
