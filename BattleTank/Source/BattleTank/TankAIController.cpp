@@ -24,7 +24,7 @@ void ATankAIController::Tick(float DeltaTime)
 			MoveToActor(PlayerPawn, AcceptanceRadius);
 			UTankAimingComponent* AimingComponent = ControlledPawn->FindComponentByClass<UTankAimingComponent>();
 			AimingComponent->AimAt(PlayerPawn->GetActorLocation());
-			//ControlledPawn->Fire();
+			AimingComponent->Fire();
 		}
 	}
 }
