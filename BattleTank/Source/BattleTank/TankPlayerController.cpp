@@ -77,7 +77,7 @@ void ATankPlayerController::AimTowardsCrosshair()
 {
 	FVector HitLocation;
 	APawn* ControlledPawn = GetPawn();
-	if (ensure(ControlledPawn) && GetSightRayHitLocation(HitLocation))
+	if (ControlledPawn && GetSightRayHitLocation(HitLocation))
 	{
 		UTankAimingComponent* AimingComponent = ControlledPawn->FindComponentByClass<UTankAimingComponent>();
 		AimingComponent->AimAt(HitLocation);
