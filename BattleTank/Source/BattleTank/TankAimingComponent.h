@@ -58,7 +58,11 @@ private:
 
 	UTankTurret* Turret = nullptr;
 
+	FVector TargetAimDirection;
+
 private:
+	bool IsBarrelMoving();
+
 	void MoveBarrelTowards(FVector AimDirection);
 
 	virtual void BeginPlay() override;
