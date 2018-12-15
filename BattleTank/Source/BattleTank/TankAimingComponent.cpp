@@ -60,6 +60,11 @@ EFiringState UTankAimingComponent::GetFiringState() const
 	return FiringState;
 }
 
+int32 UTankAimingComponent::GetRoundsLeft() const
+{
+	return RoundsLeft;
+}
+
 bool UTankAimingComponent::IsBarrelMoving()
 {
 	return Barrel && !(TargetAimDirection.Equals(Barrel->GetForwardVector(), 9.999999747e-04F));
@@ -96,24 +101,27 @@ void UTankAimingComponent::TickComponent(float DeltaTime, enum ELevelTick TickTy
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	if ((FPlatformTime::Seconds() - LastFireTime) < ReloadTimeInSeconds)
+	if (!(EFiringState::OutOfAmmo == FiringState))
 	{
-		FiringState = EFiringState::Reloading;
-	}
-	else if (IsBarrelMoving())
-	{
-		FiringState = EFiringState::Aiming;
-	}
-	else
-	{
-		FiringState = EFiringState::Locked;
+		if ((FPlatformTime::Seconds() - LastFireTime) < ReloadTimeInSeconds)
+		{
+			FiringState = EFiringState::Reloading;
+		}
+		else if (IsBarrelMoving())
+		{
+			FiringState = EFiringState::Aiming;
+		}
+		else
+		{
+			FiringState = EFiringState::Locked;
+		}
 	}
 	//TODO handle aiming and locked states
 }
 
 void UTankAimingComponent::Fire()
 {
-	if (EFiringState::Aiming == FiringState)
+	if (EFiringState::Locked == FiringState)
 	{
 		if (ensure(Barrel) && ensure(BlueprintProjectile))
 		{
@@ -125,6 +133,10 @@ void UTankAimingComponent::Fire()
 			Projectile->LauchnProjectile(LaunchSpeed);
 
 			LastFireTime = FPlatformTime::Seconds();
+			if (--RoundsLeft == 0)
+			{
+				FiringState = EFiringState::OutOfAmmo;
+			}
 		}
 	}
 }
