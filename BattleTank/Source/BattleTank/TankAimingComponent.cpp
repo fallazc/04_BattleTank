@@ -72,14 +72,14 @@ bool UTankAimingComponent::IsBarrelMoving()
 
 void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 {
-	// Work-out difference between current barrel rotation and Aimdirection
+	// Work-out difference between current barrel rotation and aimdirection
 	FRotator BarrelRotator = Barrel->GetForwardVector().Rotation();
 	FRotator AimAsRotator = AimDirection.Rotation();
 	FRotator DeltaRotator = AimAsRotator - BarrelRotator;
 
 	//Always yaw the shortest way
 	Barrel->Elevate(DeltaRotator.Pitch);
-	if (DeltaRotator.Yaw < 180)
+	if (FMath::Abs(DeltaRotator.Yaw) < 180)
 	{
 		Turret->Rotate(DeltaRotator.Yaw);
 	}
