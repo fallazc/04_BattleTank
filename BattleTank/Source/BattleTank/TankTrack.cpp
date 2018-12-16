@@ -3,8 +3,6 @@
 #include "TankTrack.h"
 #include "Engine/World.h"
 
-
-
 UTankTrack::UTankTrack()
 {
 	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
