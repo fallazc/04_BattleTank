@@ -7,6 +7,7 @@
 #include "Projectile.generated.h"
 
 class UStaticMeshComponent;
+class URadialForceComponent;
 class UParticleSystemComponent;
 class UProjectileMovementComponent;
 
@@ -32,7 +33,10 @@ protected:
 	UParticleSystemComponent* LaunchBlast = nullptr;
 
 	UPROPERTY(VisibleAnywhere)
-		UParticleSystemComponent* ImpactBlast = nullptr;
+	UParticleSystemComponent* ImpactBlast = nullptr;
+
+	UPROPERTY(VisibleAnywhere)
+	URadialForceComponent* ExplosionForce = nullptr;
 
 protected:
 	// Called when the game starts or when spawned
