@@ -45,6 +45,13 @@ void AProjectile::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherACtor, U
 	ImpactBlast->Activate();
 	LaunchBlast->Deactivate();
 	ExplosionForce->FireImpulse();
+
+	GetWorld()->GetTimerManager().SetTimer(Timer, this, &AProjectile::OnTimerExpire, DestroyDelay, false);
+}
+
+void AProjectile::OnTimerExpire()
+{
+	Destroy();
 }
 
 // Called every frame
