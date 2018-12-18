@@ -28,6 +28,9 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = Setup)
 	float DestroyDelay = 10.f;
 
+	UPROPERTY(EditDefaultsOnly, Category = Setup)
+	float ProjectileDamage = 10.f;
+
 	UPROPERTY(VisibleAnywhere)
 	UProjectileMovementComponent* ProjectileMovement = nullptr;
 
