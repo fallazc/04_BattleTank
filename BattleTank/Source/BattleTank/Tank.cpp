@@ -16,6 +16,11 @@ void ATank::BeginPlay()
 	Super::BeginPlay();
 }
 
+float ATank::GetHealthPercent() const
+{
+	return CurrentHealth / (float)StartingHealth;
+}
+
 // Called to bind functionality to input
 void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
@@ -27,13 +32,14 @@ float ATank::TakeDamage(float Damage, struct FDamageEvent const& DamageEvent, AC
 	int32 DamagePoints = FPlatformMath::RoundToInt(Damage);
 	const int32 DamageToApply = FMath::Clamp<int32>(DamagePoints, 0, CurrentHealth);
 
+	CurrentHealth -= DamageToApply;
 	if (CurrentHealth > 0)
 	{
-		CurrentHealth -= DamageToApply;
+		UE_LOG(LogTemp, Warning, TEXT("Damage = %f. DamageToApply = %i"), Damage, DamageToApply);
 	}
 	else
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Tank is dead"));
+		OnDeath.Broadcast();
 	}
 	
 	return DamageToApply;
