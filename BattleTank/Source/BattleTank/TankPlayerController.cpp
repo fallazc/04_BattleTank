@@ -2,6 +2,7 @@
 
 #include "TankPlayerController.h"
 #include "TankAimingComponent.h"
+#include "Tank.h"
 #include "Engine/World.h"
 
 void ATankPlayerController::BeginPlay()
@@ -17,6 +18,26 @@ void ATankPlayerController::BeginPlay()
 		UE_LOG(LogTemp, Warning, TEXT("Player controller cannot find aiming component at Begin play"));
 	}
 
+}
+
+void ATankPlayerController::SetPawn(APawn* Pawn)
+{
+	Super::SetPawn(Pawn);
+
+	ATank* PossessedTank = Cast<ATank>(Pawn);
+	if (PossessedTank)
+	{
+		PossessedTank->OnDeath.AddUniqueDynamic(this, &ATankPlayerController::OnPossesedTankDeath);
+	}
+}
+
+void ATankPlayerController::OnPossesedTankDeath()
+{
+	APawn* PossessedPawn = GetPawn();
+	if (PossessedPawn)
+	{
+		StartSpectatingOnly();
+	}
 }
 
 void ATankPlayerController::Tick(float DeltaTime)

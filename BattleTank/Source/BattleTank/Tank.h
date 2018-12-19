@@ -28,7 +28,7 @@ protected:
 	int32 StartingHealth = 100;
 
 	UPROPERTY(VisibleAnywhere, category = Health)
-	int32 CurrentHealth = 100;
+	int32 CurrentHealth;
 
 public:	
 	//Returns current health as a percentage of starting health between 0 and 1

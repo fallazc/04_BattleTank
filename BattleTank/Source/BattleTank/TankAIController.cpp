@@ -13,8 +13,9 @@ void ATankAIController::BeginPlay()
 void ATankAIController::SetPawn(APawn* Pawn)
 {
 	Super::SetPawn(Pawn);
+
 	ATank* PossessedTank = Cast<ATank>(Pawn);
-	if (ensure(PossessedTank))
+	if (PossessedTank)
 	{
 		PossessedTank->OnDeath.AddUniqueDynamic(this, &ATankAIController::OnPossesedTankDeath);
 	}
@@ -27,9 +28,9 @@ void ATankAIController::Tick(float DeltaTime)
 	APawn* ControlledPawn = GetPawn();
 	APawn* PlayerPawn = GetWorld()->GetFirstPlayerController()->GetPawn();
 
-	if (ensure(ControlledPawn))
+	if (ControlledPawn)
 	{
-		if (ensure(PlayerPawn))
+		if (PlayerPawn)
 		{
 			// TODO check radius is in cm
 			MoveToActor(PlayerPawn, AcceptanceRadius);
@@ -42,5 +43,9 @@ void ATankAIController::Tick(float DeltaTime)
 
 void ATankAIController::OnPossesedTankDeath()
 {
-	UE_LOG(LogTemp, Warning, TEXT("Received"));
+	APawn* PossessedPawn = GetPawn();
+	if (PossessedPawn)
+	{
+		PossessedPawn->DetachFromControllerPendingDestroy();
+	}
 }
